@@ -53,7 +53,7 @@ class FaceAtomic:
 		rec_id is a string and is stored as ConceptNode
 		tracker_id is integer stored as NumberNode
 		'''
-		stl = "(EvaluationLink (Predicate \"name\") (ListLink (ConceptNode \"" + str(tracker_id) + "\") (ConceptNode \"" + rec_id + "\")))\n"
+		stl = "(StateLink (AnchorNode \"last-recognized-face\") (ConceptNode \"" + rec_id + "\"))\n"
 		#stl = "(StateLink (NumberNode \"" + str(faceid) + "\") (ConceptNode \"" + rec_id +"\"))\n"
 		netcat(self.hostname, self.port, stl + "\n")
 
@@ -74,7 +74,7 @@ class FaceAtomic:
 
 		# AtomSpace cog-delete takes handle as an argument.
 		msg = self.delete_face(faceid)
-		netcat(self.hostname, self.port, msg)
+		# netcat(self.hostname, self.port, msg)
 		print "Removed face from atomspace: ", faceid
 
 	# Build a simple string to define a face
@@ -87,7 +87,7 @@ class FaceAtomic:
 	# Build string to delete the face, and also to garbage-collect
 	# the ListLink NumberNode.
 	def delete_face(self, faceid):
-		pattern = "(EvaluationLink (Predicate \"name\") (ListLink (ConceptNode \"" + str(faceid) + "\") (VariableNode \"f\")))"
+		pattern = "(EvaluationLink (PredicateNode \"name\") (ListLink (ConceptNode \"" + str(faceid) + "\") (VariableNode \"f\")))"
 		del_face = "(cog-execute! (PutLink (DeleteLink "+pattern+") (GetLink "+pattern+")))"
 		face = "(cog-delete " + \
 				"(EvaluationLink (PredicateNode \"visible face\") " + \
