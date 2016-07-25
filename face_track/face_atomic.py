@@ -53,8 +53,8 @@ class FaceAtomic:
 		rec_id is a string and is stored as ConceptNode
 		tracker_id is integer stored as NumberNode
 		'''
-		# stl = "(StateLink (AnchorNode \"last-recognized-face\") (ConceptNode \"" + rec_id + "\"))\n"
-		stl = "(EvaluationLink (Predicate \"name\") (ListLink (ConceptNode \"" + str(tracker_id) + "\") (ConceptNode \"" + rec_id + "\")))\n"
+		stl = "(StateLink (AnchorNode \"last-recognized-face\") (ConceptNode \"" + rec_id + "\"))\n"
+		# stl = "(EvaluationLink (Predicate \"name\") (ListLink (ConceptNode \"" + str(tracker_id) + "\") (ConceptNode \"" + rec_id + "\")))\n"
 		#stl = "(StateLink (NumberNode \"" + str(faceid) + "\") (ConceptNode \"" + rec_id +"\"))\n"
 		netcat(self.hostname, self.port, stl + "\n")
 
